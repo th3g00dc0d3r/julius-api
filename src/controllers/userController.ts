@@ -1,28 +1,30 @@
-import { getManager } from "typeorm";
-import { User } from "../entity/User";
+import { getManager } from 'typeorm'
+
+import { Entry } from '../entity/Entry'
+import { User } from '../entity/User'
 
 export class UserController {
-    async save(user: User) {
-        const savedUser = await getManager().save(user);
-        return savedUser;
-    }
+  async save(user: User): Promise<User> {
+    const savedUser = await getManager().save(user)
+    return savedUser
+  }
 
-    async listAllUsers() {
-        const users = await getManager().find(User);
-        return users;
-    }
+  async listAllUsers(): Promise<User[]> {
+    const users = await getManager().find(User)
+    return users
+  }
 
-    async retrieveUserById(id: number) {
-        const user = await getManager().findOne(User, id);
+  async retrieveUserById(id: number): Promise<User> {
+    const user = await getManager().findOne(User, id)
 
-        return user;
-    }
+    return user
+  }
 
-    async retrieveUserEntries(id: number) {
-        const user = await getManager().findOne(User, id, {
-            relations: ['entries']
-        })
+  async retrieveUserEntries(id: number): Promise<Entry[]> {
+    const user = await getManager().findOne(User, id, {
+      relations: ['entries'],
+    })
 
-        return user.entries;
-    }
+    return user.entries
+  }
 }

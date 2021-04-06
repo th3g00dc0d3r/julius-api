@@ -1,23 +1,23 @@
-import * as express from "express";
-import * as cors from "cors";
-import * as morgan from "morgan";
+import * as cors from 'cors'
+import * as express from 'express'
+import * as morgan from 'morgan'
 
-import { connectServerToDB } from "./config/db";
-import { userRouter } from "./routes/user";
-import { entryRouter} from "./routes/entry";
+import { connectServerToDB } from './config/db'
+import { entryRouter } from './routes/entry'
+import { userRouter } from './routes/user'
 
-export const app = express();
+export const app = express()
 
-app.use(cors());
+app.use(cors())
 
-app.use(express.json());
+app.use(express.json())
 
-app.use(morgan('dev'));
+app.use(morgan('dev'))
 
-connectServerToDB();
+connectServerToDB()
 
-app.use("/user", userRouter);
+app.use('/user', userRouter)
 
-app.use("/entry", entryRouter);
+app.use('/entry', entryRouter)
 
-app.use("/", (req, res) => res.send("Julius API at PORT: 3000"));
+app.use('/', (req, res) => res.send('Julius API at PORT: 3000'))
